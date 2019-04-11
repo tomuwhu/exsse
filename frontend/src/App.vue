@@ -1,6 +1,7 @@
 <template>
   <div>
       Cica2 {{x.cucc}}
+      <hr>
       <input v-model="i1" @keyup.enter="f()">
   </div>
 </template>
@@ -22,12 +23,23 @@ export default {
     methods: {
         f() {
             this.axios
-                .get('/cica')
+                .get('http://localhost:3000/cica/'+this.i1)
                 .then( res => 
-                    this.i1 = cres.data
+                    this.x = 'Beállítva:' + res.data
                 )
-            //this.i1=''
+            this.i1=''
         }
     }
 }
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>

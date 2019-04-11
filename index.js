@@ -4,24 +4,23 @@ const cors = require('cors')
 const app = express()
 app.use(cors())
 var sse = new SSE()
-
-app.get('/stream', sse.init)
-
-app.get('/',(req,res)=>{
-    res.send(`
-<script>
-var es = new EventSource('/stream');
- 
-es.onmessage = (event) => {
-    console.log(event)
-}
-</script>
-Cica
-`)
-})
-let p=1
+let p = 1
 setInterval(()=>sse.send({cucc:p++}),2000)
 
+app.get('/stream', (req,res) => {
+    p = 1
+    sse.init(req,res) 
+})
+
+app.get('/cica/:id', (req,res) => {
+    p = Number(req.params.id)
+    res.send('Sziámi')
+})
+
 app.get('/most', ()=>sse.send({cucc:1}))
+
+app.get('/', (req,res) => {
+    res.redirect('http://localhost:8080')
+})
 
 app.listen(3000)
