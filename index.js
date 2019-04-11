@@ -14,10 +14,13 @@ app.get('/stream', (req,res) => {
 
 app.get('/cica/:id', (req,res) => {
     p = Number(req.params.id)
-    res.send('Sziámi')
+    res.send(p.toString())
 })
 
-app.get('/most', ()=>sse.send({cucc:1}))
+app.get('/most', (req,res)=> {
+    p+=10
+    res.send(p.toString())
+})
 
 app.get('/', (req,res) => {
     res.redirect('http://localhost:8080')

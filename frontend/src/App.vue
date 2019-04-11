@@ -1,8 +1,11 @@
 <template>
   <div>
-      Cica2 {{x.cucc}}
+      {{y}}<br>
+      {{x.cucc}}
       <hr>
       <input v-model="i1" @keyup.enter="f()">
+      <hr>
+      <button @click="pp()"> + </button>
   </div>
 </template>
 
@@ -11,6 +14,7 @@ var es
 export default {
     data: () => ({
         x: 1,
+        y: 'Inicializálva 1-el.',
         i1: ''
     }),
     mounted() {
@@ -25,9 +29,16 @@ export default {
             this.axios
                 .get('http://localhost:3000/cica/'+this.i1)
                 .then( res => 
-                    this.x = 'Beállítva:' + res.data
+                    this.y = 'Beállítva:' + res.data
                 )
             this.i1=''
+        },
+        pp() {
+            this.axios
+                .get('http://localhost:3000/most/')
+                .then( res => 
+                    this.y = 'Növelve ' + res.data +'-re.'
+                )
         }
     }
 }
