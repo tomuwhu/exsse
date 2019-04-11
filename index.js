@@ -20,6 +20,7 @@ app.get('/cica/:id', (req,res) => {
 app.get('/most', (req,res)=> {
     p+=10
     res.send(p.toString())
+    sse.send({cucc: p})
 })
 
 app.get('/', (req,res) => {
